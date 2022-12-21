@@ -202,3 +202,15 @@ To get around this problem in the frontend, I created a map of all pieces and a 
 ![image](https://user-images.githubusercontent.com/54673205/208888803-c4423b12-4954-4c87-b84e-eaa7d56ff6ad.png)
 ![image](https://user-images.githubusercontent.com/54673205/208891005-ef1c1091-ace3-4027-97b9-e270e777073a.png)
 
+
+## Bug Hunting
+
+thread 'actix-rt|system:0|arbiter:3' panicked at 'attempt to subtract with overflow', src/gameplay/board.rs:276:66
+
+Came across this bug quite often whilst working on the backend. It was one of those errors that was not reproducible at every step of the way, just sometimes with certain pieces. Ensuring that the shift calculation occured within the match, rather than outside of the player match definition fixed those thread issues from occuring again:
+
+(match self.at(shift.destination) {
+                    Cells::Missing => {
+                        shift.origin.x == shift.destination.x
+                            && (shift.origin.y == shift.destination.y - 1
+                                || shift.origin.y == 1 && shift.destination.y == 3)

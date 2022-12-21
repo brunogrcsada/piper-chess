@@ -150,11 +150,21 @@ PORT=4221 serve -s build & npm run test:e2e
 
 ## 🗒️ Challenge Outline
 
-The main aim for this project is to create a 2-player chess game in a full stack application, with React being used as a frontend framework and Rust as a backend. To ensure that the game choices, movements and general logic is validated, any actions in the frontend must go through the Rust API, process and return a relevant game update to refresh any states in React. For Piper Chess, the main outline is as follows:
+The main aim for this project is to create a 2-player chess game in a full stack application, with React being used as a frontend framework and Rust as a backend. To ensure that the game choices, movements and general logic is validated, any actions in the frontend must go through the Rust API, process and return a relevant game update to refresh any states in React. For Piper Chess, the main proposed solution outline is as follows:
 
 ### Project breakdown summary
 
 When the page first loads, the game will attempt to retrieve an existing world status from the API. If successful, the board will auto-generate with all of the previous moves. Next, the current player attempts to move one of their pieces, so the front-end will give the hints on where they can move, and when the destination tile has been confirmed, an API call is made to the Actix backend to verify whether the move is valid in the first place, and then to update game state server-side if so. When the Actix backend processes the move, it returns a body with the updated game state, already with the next player selected and any special situations such as check or check mate verified. Using React’s nifty state management, an event is dispatched once the API data has been returned, and the board automatically re-renders its components, placing the pieces in the correct board co-ordinates. The same is repeated throughout the game, until the timer reaches 0, where the player with the highest number of stolen pieces wins, or when a player reaches check mate.
+
+### Initial Work
+
+Prior to developing extended logic for every chess piece and game component, I aimed to focus on creating the base project as a template for any further development. This included functionality for e2e and unit-based testing, as well as a base React and Rust project with some useful utilities that will be required based on the original plan.
+
+The epic structure is quite split evenly between backend and front-end, so I focused on developing upon specific user stories full stack, rather than completing the frontend first and then the backend stories.
+
+However, there is an exception to this; the work on piece logic was quite fragmented between the two parts of the stack. To ensure that I had a good idea on how to handle the pieces and how they behaved on the board, I completed initial frontend logic for pieces first. The Rust-based iteration is an improvement upon the work that I did to refactor and automate the rules for each piece, ending up in a co-ordinate based system for the API.
+
+To ensure that the base API responses are valid throughout the development of the full stack application, I added a mock file with the initial global state of a game. Whenever the test is run, a comparison is made between the server response and the expected mock result. This can save quite a few headaches!
 
 ### Logic Diagrams
 

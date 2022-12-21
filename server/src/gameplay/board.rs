@@ -271,10 +271,6 @@ impl ChessBoard {
         let to_x: usize = shift.destination.x;
         let to_y: usize = shift.destination.y;
 
-        // Define matching co-ordinates for black pawns
-        let black_x: bool = from_x == to_x && (from_y == to_y + 1 || from_y == 6 && to_y == 4);
-        let black_y: bool = (from_y == (to_y + 1)) && (from_x == to_x - 1 || from_x == to_x + 1);
-
         match player {
             // Is player 1 (white)
             Player::White => {
@@ -297,8 +293,10 @@ impl ChessBoard {
             // Is player 2 (black)
             Player::Black => {
                 (match self.at(shift.destination) {
-                    Cells::Missing => black_x,
-                    _ => black_y,
+                    Cells::Missing => {
+                        from_x == to_x && (from_y == to_y + 1 || from_y == 6 && to_y == 4)
+                    }
+                    _ => (from_y == (to_y + 1)) && (from_x == to_x - 1 || from_x == to_x + 1),
                 }) && (to_y != 0
                     || promo
                     || self.at(shift.destination) == Cells::Piece(GamePiece::King, Player::White))

@@ -3,6 +3,7 @@ import "./board.css";
 import React, { useState } from "react";
 import { ruling } from "../../definitions";
 
+// Accurately calculate the difference between two numbers
 function diff(start, end) {
   if (start > end) {
     return start - end;
@@ -18,8 +19,6 @@ function Board({ state, move, player, data, timer, wMissing, bMissing }) {
 
   const letters = ["a", "b", "c", "d", "e", "f", "g", "h"];
   const numbers = [8, 7, 6, 5, 4, 3, 2, 1];
-
-  console.log(data);
 
   const processHighlight = async (piece, cell) => {
     if (highlight.length) {
@@ -57,11 +56,13 @@ function Board({ state, move, player, data, timer, wMissing, bMissing }) {
       let irregular = false;
       let special = false;
 
+      // Loop through rulebook for chosen piece
       ruleSet.forEach((rule, index) => {
         const move = rule.move;
         const white = piece[0] !== "w";
         const current = letters.findIndex((l) => l === c[0]);
 
+        // Literal string value of the tile, with letter + number
         const nextTile = `${letters[current + (white ? -move[0] : +move[0])]}${
           parseInt(c[1]) + (white ? -move[1] : +move[1])
         }`;
@@ -79,6 +80,7 @@ function Board({ state, move, player, data, timer, wMissing, bMissing }) {
           blocked = false;
           hardBlock = false;
 
+          // L shape is the odd one out, this creates an exception
           if (move[0] !== -1 && move[1] !== 1 && p === "knight") {
             irregular = true;
           }
@@ -169,7 +171,7 @@ function Board({ state, move, player, data, timer, wMissing, bMissing }) {
   return (
     <div className="board">
       {/* Display game end overlay */}
-      {(data.check || timer) && (
+      {(data.mate || timer) && (
         <div className="end">
           <div className="endContainer">
             <span className="endTitle">
@@ -217,10 +219,6 @@ function Board({ state, move, player, data, timer, wMissing, bMissing }) {
                   await processHighlight(mapped, cell);
                 }}
               >
-                <div>
-                  {letter}
-                  {number}
-                </div>
                 {mapped ? (
                   <img
                     alt={`${letter}${number}`}

@@ -23,7 +23,7 @@ async fn index(moves: web::Path<(String, String)>) -> HttpResponse {
 
     // General game
     let data: HashMap<String, String>;
-    let color: Player;
+    let player: Player;
 
     // Valid move tracker
     let mut valid: bool = true;
@@ -48,7 +48,7 @@ async fn index(moves: web::Path<(String, String)>) -> HttpResponse {
             CURRENT_PLAYER = CURRENT_PLAYER.other();
         }
 
-        color = CURRENT_PLAYER;
+        player = CURRENT_PLAYER;
 
         if GAME_BOARD.check(CURRENT_PLAYER) {
             check = true;
@@ -61,7 +61,7 @@ async fn index(moves: web::Path<(String, String)>) -> HttpResponse {
     }
 
     // Send back response to client
-    response::send(&color, data, valid, check, mate).await
+    response::send(&player, data, valid, check, mate).await
 }
 
 #[get("/state")]
@@ -82,10 +82,8 @@ async fn state() -> HttpResponse {
         data = GAME_BOARD.output();
 
         if GAME_BOARD.check(CURRENT_PLAYER) {
-            print!(". Your king is in check");
             check = true;
             if GAME_BOARD.mate(CURRENT_PLAYER) {
-                println!(" and mate! You lose");
                 mate = true;
             }
         }

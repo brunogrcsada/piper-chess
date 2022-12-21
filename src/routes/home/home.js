@@ -29,7 +29,9 @@ function Home() {
       fetch(`http://localhost:2020/state`)
         .then((res) => res.json())
         .then((res) => {
-          console.log("RES: ", res);
+          // Display for demo purposes
+          console.warn("RES: ", res);
+
           if (res) {
             setData(res);
             setState(res.world);

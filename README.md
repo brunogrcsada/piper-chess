@@ -152,9 +152,21 @@ PORT=4221 serve -s build & npm run test:e2e
 
 ### Code cleanliness and documentation
 
-To ensure that my code is understood by another developer, I commented any unclear processes and included extra information behind my thought process. React helped me to compartmentalise functionality in different components, such as creating a separate timer widget that dealt with the general game countdown. Here is an example of where I applied both documentation practices and OOP to improve the readability and extensibility of the component:
+Commenting code is a standard programming practice and mechanism to enhance comprehensibility whilst enabling developers to clarify the code in their own words. To ensure that my code is understood by another developer, I commented any unclear processes and included extra information behind my thought process. React helped me to compartmentalise functionality in different components, such as creating a separate timer widget that dealt with the general game countdown. Here is an example of where I applied both documentation practices and OOP to improve the readability and extensibility of the component:
 
 ![image](https://user-images.githubusercontent.com/54673205/208884404-b128d206-0085-4af1-9b0f-29668e27548e.png)
+
+### Code refactoring
+
+Another fundamental element relating to development is the process of refactoring code. This describes the process of refining and improving pre-written code in such a way that does not alter its external function whilst mitigating the introduction of bugs. Refactoring enables written code to be more concise, improving its readability. One of the most thought-provoking parts of this project was handling states, possible moves and in-game highlight helpers for each piece in the game. It was initially becoming tedious to create selection statements for every possible move type and piece, such as the one seen below:
+
+![image](https://user-images.githubusercontent.com/54673205/208888629-e9a9eb1d-42ff-463f-9ab7-7d451ab6a321.png)
+
+To get around this problem in the frontend, I created a map of all pieces and a 'rule book' attached to each. The possible move ranges are all defined in one exported variable which can be used accross the project. After making this change and ensuring that all rules were looped and accessed directly from the map, it was a lot cleaner to make extra changes to edge-cases and piece-specific behaviour. For the pawn, since it requires quite a bit of logic depending on enemies surrounding the piece and its position, I implemented the behaviour in the screenshot above to handle the piece separately. However, this didn't impact the information obtained and used from the rule book. 
+
+![image](https://user-images.githubusercontent.com/54673205/208888803-c4423b12-4954-4c87-b84e-eaa7d56ff6ad.png)
+![image](https://user-images.githubusercontent.com/54673205/208891005-ef1c1091-ace3-4027-97b9-e270e777073a.png)
+
 
 ## Project Management
 

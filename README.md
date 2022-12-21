@@ -147,3 +147,18 @@ cargo start
 ```sh
 PORT=4221 serve -s build & npm run test:e2e
 ```
+
+## 🗒️ Coding Practices:
+
+### Code cleanliness and documentation
+
+To ensure that my code is understood by another developer, I commented any unclear processes and included extra information behind my thought process. React helped me to compartmentalise functionality in different components, such as creating a separate timer widget that dealt with the general game countdown. Here is an example of where I applied both documentation practices and OOP to improve the readability and extensibility of the component:
+
+![image](https://user-images.githubusercontent.com/54673205/208884404-b128d206-0085-4af1-9b0f-29668e27548e.png)
+
+## Project Management
+
+To ensure that all tasks for the fullstack game were completed on time, I planned out all required core components for both the React and Rust codebases, and placed them as cards in Trello. Whilst I was quite ambitious to implement web sockets with Actix, there were a lot of initial issues with setting it up from scratch in Rust; unfortunately, the deadline for the project has set as a future plan for the game.
+
+![image](https://user-images.githubusercontent.com/54673205/208886015-c819b169-0b36-484a-adc5-aca5af3cd2eb.png)
+

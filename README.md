@@ -148,6 +148,18 @@ cargo start
 PORT=4221 serve -s build & npm run test:e2e
 ```
 
+## 🗒️ Challenge Outline
+
+The main aim for this project is to create a 2-player chess game in a full stack application, with React being used as a frontend framework and Rust as a backend. To ensure that the game choices, movements and general logic is validated, any actions in the frontend must go through the Rust API, process and return a relevant game update to refresh any states in React. For Piper Chess, the main outline is as follows:
+
+When the page first loads, the game will attempt to retrieve an existing world status from the API. If successful, the board will auto-generate with all of the previous moves. Next, the current player attempts to move one of their pieces, so the front-end will give the hints on where they can move, and when the destination tile has been confirmed, an API call is made to the Actix backend to verify whether the move is valid in the first place, and then to update game state server-side if so. When the Actix backend processes the move, it returns a body with the updated game state, already with the next player selected and any special situations such as check or check mate verified. Using React’s nifty state management, an event is dispatched once the API data has been returned, and the board automatically re-renders its components, placing the pieces in the correct board co-ordinates. The same is repeated throughout the game, until the timer reaches 0, where the player with the highest number of stolen pieces wins, or when a player reaches check mate.
+
+## Project Management
+
+To ensure that all tasks for the fullstack game were completed on time, I planned out all required core components for both the React and Rust codebases, and placed them as cards in Trello. Whilst I was quite ambitious to implement web sockets with Actix, there were a lot of initial issues with setting it up from scratch in Rust; unfortunately, the deadline for the project has set as a future plan for the game.
+
+![image](https://user-images.githubusercontent.com/54673205/208886015-c819b169-0b36-484a-adc5-aca5af3cd2eb.png)
+
 ## 🗒️ Coding Practices:
 
 ### Code cleanliness and documentation
@@ -166,11 +178,4 @@ To get around this problem in the frontend, I created a map of all pieces and a 
 
 ![image](https://user-images.githubusercontent.com/54673205/208888803-c4423b12-4954-4c87-b84e-eaa7d56ff6ad.png)
 ![image](https://user-images.githubusercontent.com/54673205/208891005-ef1c1091-ace3-4027-97b9-e270e777073a.png)
-
-
-## Project Management
-
-To ensure that all tasks for the fullstack game were completed on time, I planned out all required core components for both the React and Rust codebases, and placed them as cards in Trello. Whilst I was quite ambitious to implement web sockets with Actix, there were a lot of initial issues with setting it up from scratch in Rust; unfortunately, the deadline for the project has set as a future plan for the game.
-
-![image](https://user-images.githubusercontent.com/54673205/208886015-c819b169-0b36-484a-adc5-aca5af3cd2eb.png)
 

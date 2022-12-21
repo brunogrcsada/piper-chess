@@ -1,0 +1,31 @@
+.Home {
+  text-align: center;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.switchWrap {
+  margin: 30px;
+}
+
+.center {
+  display: flex;
+  flex-direction: row;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  gap: 140px;
+
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
+  align-items: flex-start;
+}
+
+@media screen and (max-width: 860px) {
+  .center {
+    top: 600px;
+  }
+}

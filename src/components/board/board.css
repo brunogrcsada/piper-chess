@@ -1,0 +1,88 @@
+.board {
+    display: flex;
+    border: solid;
+}
+
+.cell {
+    width: 130px;
+    height: 130px;
+    background: #FFCE9E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board .column:nth-child(odd) .cell:nth-child(even) {
+    background: #D18B47;
+}
+
+.board .column:nth-child(even) .cell:nth-child(odd) {
+    background: #D18B47;
+}
+
+
+.board .column:nth-child(even) .highlight:nth-child(odd) {
+    background: #9a724a;
+    border: solid white 2px;
+}
+
+.highlight {
+    background: #9a724a;
+    border: solid white 2px;
+
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.hit {
+    border: solid green !important;
+
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.piece {
+    width: 80px;
+    height: 80px;
+}
+
+.end {
+    position: absolute;
+    margin-top: auto;
+    margin-bottom: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 1050px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(94, 94, 94, 0.734);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.endContainer {
+    width: 500px;
+    height: 500px;
+    border-radius: 40px;
+    background-color: rgb(65, 65, 65);
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    justify-content: center;
+    align-items: center;
+}
+
+.playerWon {
+    font-size: 30px;
+}
+
+.endTitle {
+    font-weight: 800;
+    font-size: 40px;
+    color: white !important;
+}

@@ -152,7 +152,20 @@ PORT=4221 serve -s build & npm run test:e2e
 
 The main aim for this project is to create a 2-player chess game in a full stack application, with React being used as a frontend framework and Rust as a backend. To ensure that the game choices, movements and general logic is validated, any actions in the frontend must go through the Rust API, process and return a relevant game update to refresh any states in React. For Piper Chess, the main outline is as follows:
 
+### Project breakdown summary
+
 When the page first loads, the game will attempt to retrieve an existing world status from the API. If successful, the board will auto-generate with all of the previous moves. Next, the current player attempts to move one of their pieces, so the front-end will give the hints on where they can move, and when the destination tile has been confirmed, an API call is made to the Actix backend to verify whether the move is valid in the first place, and then to update game state server-side if so. When the Actix backend processes the move, it returns a body with the updated game state, already with the next player selected and any special situations such as check or check mate verified. Using React’s nifty state management, an event is dispatched once the API data has been returned, and the board automatically re-renders its components, placing the pieces in the correct board co-ordinates. The same is repeated throughout the game, until the timer reaches 0, where the player with the highest number of stolen pieces wins, or when a player reaches check mate.
+
+### Logic Diagrams
+
+This is a rough design of the architectural implementation for this project. It includes the necessary basic calls to the API, including initial game state and update game board based on user actions. Board and timer class + method definitions are included as a visual aid. Similarly, each individual board piece, player and tile would be represented as their own objects.
+
+![Advanced Programming drawio](https://user-images.githubusercontent.com/54673205/208896015-192ee6a0-d436-4563-b24b-20a7b6c9bcaa.png)
+
+The following UML-focused diagrams show how each Rust implementation of functionality connects to each other in the project. These are the core components of the game board, any any following logic is undergone in ChessBoard operations
+
+![Untitled drawio](https://user-images.githubusercontent.com/54673205/208897607-e9ec62a0-7b45-4496-afae-b60ad57e824e.png)
+
 
 ## Project Management
 
